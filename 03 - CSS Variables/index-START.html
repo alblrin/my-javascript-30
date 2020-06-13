@@ -21,10 +21,25 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: gray;
+      --spacing: 10px;
+      --blur: 10px;
+    }
 
     /*
       misc styles, nothing to do with CSS variables
     */
+
+    img {
+      filter: blur(var(--blur));
+      padding: var(--spacing);
+      background: var(--base);
+    }
+
+    .hl {
+      color: var(--base);
+    }
 
     body {
       text-align: center;
@@ -45,6 +60,8 @@
   </style>
 
   <script>
+    inputs = document.querySelectorAll('input')
+
   </script>
 
 </body>
