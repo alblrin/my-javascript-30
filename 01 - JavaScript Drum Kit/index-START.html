@@ -67,18 +67,9 @@
     key.classList.add("playing");
   };
 
-
-  function removeTransition(event) {
-    if (event.propertyName != 'transform') return;
-    this.classList.remove("playing");
-  };
-
-  // this returns key
-
-
   const removeTransition = (event) => {
     if (event.propertyName != 'transform') return;
-    this.classList.remove("playing");
+    event.currentTarget.classList.remove("playing");
   };
 
   // this returns window (wtf?)
