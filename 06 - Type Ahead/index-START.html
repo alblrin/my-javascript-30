@@ -10,12 +10,39 @@
   <form class="search-form">
     <input type="text" class="search" placeholder="City or State">
     <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
     </ul>
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+const cities = [];
+
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data))
+
+const inputQuery = document.querySelector('.search')
+
+const fetchCities = (event) => {
+  const inputValue = event.target.value;
+  const regex = new RegExp(inputValue, 'gi');
+  return cities.filter(city => city.city.match(regex));
+};
+
+const suggestions = document.querySelector('.suggestions');
+
+const displayCities = (event) => {
+  suggestions.innerHTML = null;
+
+  const matchingCities = fetchCities(event);
+  const htmlList = matchingCities.map((city) => {
+    return `<li><span>${city.city}, ${city.state}</span><span>${city.population}</span></li>`
+  })
+  htmlList.forEach((html) => suggestions.innerHTML += html);
+};
+
+inputQuery.addEventListener('change', displayCities);
+inputQuery.addEventListener('keyup', displayCities);
 
 </script>
 </body>
