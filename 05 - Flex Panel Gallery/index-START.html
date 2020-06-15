@@ -14,18 +14,20 @@
       font-size: 20px;
       font-weight: 200;
     }
-    
+
     body {
       margin: 0;
     }
-    
+
     *, *:before, *:after {
       box-sizing: inherit;
     }
 
     .panels {
       min-height: 100vh;
+      min-width: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -43,6 +45,11 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      cursor: pointer;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -56,6 +63,10 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .panel p {
@@ -64,13 +75,19 @@
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
     }
-    
+
     .panel p:nth-child(2) {
       font-size: 4em;
     }
 
-    .panel.open {
+    .panel > *:first-child { transform: translateY(-100%); }
+    .panel.open-active > *:first-child { transform: translateY(0); }
+    .panel > *:last-child { transform: translateY(100%); }
+    .panel.open-active > *:last-child { transform: translateY(0); }
+
+    .panel.open-active {
       font-size: 40px;
+      flex: 2;
     }
 
   </style>
@@ -105,7 +122,11 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel');
 
+    panels.forEach((panel) => {
+      panel.addEventListener("click", event => panel.classList.toggle('open-active'));
+  });
   </script>
 
 
