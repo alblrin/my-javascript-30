@@ -7,6 +7,17 @@
 </head>
 <body>
 <script>
+  const arr = []
+  const secretCode = 'axel'
+
+  window.addEventListener('keyup', (event) => {
+    arr.push(event.key);
+    arr.splice(-secretCode.length - 1, arr.length - secretCode.length);
+    if (arr.join('') === secretCode) {
+      cornify_add();
+      console.log('BINGOOOO');
+    }
+  })
 </script>
 </body>
 </html>
