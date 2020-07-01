@@ -191,8 +191,13 @@
 
   let secondsLeft = totalSeconds;
   const hours = Math.floor(secondsLeft / 3600);
-  const minutes = Math.floor(secondsLeft % 3600 / 60);
+  secondsLeft = secondsLeft % 3600;
+
+  const minutes = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
+
   const seconds = secondsLeft % 60;
+
   console.log(hours, minutes, seconds);
 
 </script>
