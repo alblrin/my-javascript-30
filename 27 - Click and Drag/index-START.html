@@ -35,6 +35,37 @@
   </div>
 
 <script>
+  const grab = document.querySelector('.items');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  grab.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - grab.offsetLeft;
+    scrollLeft = grab.scrollLeft;
+    grab.classList.add('active');
+  })
+
+  grab.addEventListener('mouseup', () => {
+    isDown = false;
+    grab.classList.remove('active');
+  })
+
+  grab.addEventListener('mouseleave', () => {
+    isDown = false;
+
+  })
+
+  grab.addEventListener('mousemove', (e) => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - grab.offsetLeft;
+    const walk = x - startX;
+    grab.scrollLeft = scrollLeft - walk;
+
+  })
+
 </script>
 
   </body>
